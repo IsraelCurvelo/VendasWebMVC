@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using VendasMVCWeb.Models;
+using VendasMVCWeb.Models.ViewModels;
 
 namespace VendasMVCWeb.Controllers
 {
@@ -17,7 +18,8 @@ namespace VendasMVCWeb.Controllers
 
         public IActionResult About()
         {
-            ViewData["Message"] = "Your application description page.";
+            ViewData["Message"] = "Projeto de Vendas Web MVC";
+            ViewData["Autor"] = "Israel Curvelo";
 
             return View();
         }
