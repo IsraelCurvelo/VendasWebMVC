@@ -33,9 +33,9 @@ namespace VendasMVCWeb.Data
             Vendedor s1 = new Vendedor(1, "João da Silva"  , "joaosilva@gmail.com", new DateTime(1998, 04, 21), 1000.0, d1);
             Vendedor s2 = new Vendedor(2, "Maria Santos"   , "msantos12@gmail.com", new DateTime(1990, 05, 01), 3500.0, d2);
             Vendedor s3 = new Vendedor(3, "José Leonardo"  , "joleo@gmail.com"    , new DateTime(1988, 12, 06), 2200.0, d1);
-            Vendedor s4 = new Vendedor(4, "Marta Soares"   , "joaosilva@gmail.com", new DateTime(1998, 04, 10), 3000.0, d4);
-            Vendedor s5 = new Vendedor(5, "João dos Santos", "joaosilva@gmail.com", new DateTime(1998, 02, 11), 4000.0, d3);
-            Vendedor s6 = new Vendedor(6, "Alex Pinheiro"  , "joaosilva@gmail.com", new DateTime(1998, 01, 23), 3000.0, d2);
+            Vendedor s4 = new Vendedor(4, "Marta Soares"   , "martasoares@gmail.com", new DateTime(1998, 04, 10), 3000.0, d4);
+            Vendedor s5 = new Vendedor(5, "João dos Santos", "santosjoao@gmail.com", new DateTime(1998, 02, 11), 4000.0, d3);
+            Vendedor s6 = new Vendedor(6, "Alex Pinheiro"  , "alexp@gmail.com", new DateTime(1998, 01, 23), 3000.0, d2);
 
             RegistroDeVenda r1 = new RegistroDeVenda(1, new DateTime(2018, 09, 25), 11000.00, StatusDeVenda.FATURADO, s1);
             RegistroDeVenda r2 = new RegistroDeVenda(2, new DateTime(2018, 09, 4), 7000.0, StatusDeVenda.FATURADO, s5);
