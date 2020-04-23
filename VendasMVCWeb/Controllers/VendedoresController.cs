@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using VendasMVCWeb.Models;
+using VendasMVCWeb.Models.ViewModels;
 using VendasMVCWeb.Services;
 
 namespace VendasMVCWeb.Controllers
@@ -11,10 +12,13 @@ namespace VendasMVCWeb.Controllers
     public class VendedoresController : Controller
     {
         private readonly ServicosVendedor _servicosvendedor;
+        private readonly ServicosDepartamento _servicosdepartamento;
 
-        public VendedoresController (ServicosVendedor servicosVendedor)
+        public VendedoresController (ServicosVendedor servicosVendedor,ServicosDepartamento servicosDepartamento)
         {
             _servicosvendedor = servicosVendedor;
+            _servicosdepartamento = servicosDepartamento;
+
         }
 
 
@@ -26,7 +30,9 @@ namespace VendasMVCWeb.Controllers
 
         public IActionResult Create()
         {
-            return View();
+            var departamentos = _servicosdepartamento.AcharTodos();
+            var viewModel = new VendedoresViewModels { Departamentos = departamentos};
+            return View(viewModel);
         }
 
         [HttpPost]
