@@ -11,26 +11,26 @@ namespace VendasMVCWeb.Controllers
 {
     public class VendedoresController : Controller
     {
-        private readonly ServicosVendedor _servicosvendedor;
-        private readonly ServicosDepartamento _servicosdepartamento;
+        private readonly ServicosVendedor _servicosVendedor;
+        private readonly ServicosDepartamento _servicosDepartamento;
 
         public VendedoresController (ServicosVendedor servicosVendedor,ServicosDepartamento servicosDepartamento)
         {
-            _servicosvendedor = servicosVendedor;
-            _servicosdepartamento = servicosDepartamento;
+            _servicosVendedor = servicosVendedor;
+            _servicosDepartamento = servicosDepartamento;
 
         }
 
 
         public IActionResult Index()
         {
-            var lista = _servicosvendedor.AcharTodos();
+            var lista = _servicosVendedor.AcharTodos();
             return View(lista);
         }
 
         public IActionResult Create()
         {
-            var departamentos = _servicosdepartamento.AcharTodos();
+            var departamentos = _servicosDepartamento.AcharTodos();
             var viewModel = new VendedoresViewModels { Departamentos = departamentos};
             return View(viewModel);
         }
@@ -39,7 +39,7 @@ namespace VendasMVCWeb.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(Vendedor obj)
         {
-            _servicosvendedor.Inserir(obj);
+            _servicosVendedor.Inserir(obj);
             return RedirectToAction(nameof (Index));
         }
 

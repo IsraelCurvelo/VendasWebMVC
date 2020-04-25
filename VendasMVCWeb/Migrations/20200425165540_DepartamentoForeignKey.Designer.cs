@@ -9,8 +9,8 @@ using VendasMVCWeb.Data;
 namespace VendasMVCWeb.Migrations
 {
     [DbContext(typeof(VendasMVCWebContext))]
-    [Migration("20200421173944_OutraMigracao")]
-    partial class OutraMigracao
+    [Migration("20200425165540_DepartamentoForeignKey")]
+    partial class DepartamentoForeignKey
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -58,7 +58,7 @@ namespace VendasMVCWeb.Migrations
 
                     b.Property<DateTime>("DataNascimento");
 
-                    b.Property<int?>("DepartamentoId");
+                    b.Property<int>("DepartamentoId");
 
                     b.Property<string>("Email");
 
@@ -84,7 +84,8 @@ namespace VendasMVCWeb.Migrations
                 {
                     b.HasOne("VendasMVCWeb.Models.Departamento", "Departamento")
                         .WithMany("Vendedores")
-                        .HasForeignKey("DepartamentoId");
+                        .HasForeignKey("DepartamentoId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

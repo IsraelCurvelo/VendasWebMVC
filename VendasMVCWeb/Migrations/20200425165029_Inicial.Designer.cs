@@ -9,8 +9,8 @@ using VendasMVCWeb.Data;
 namespace VendasMVCWeb.Migrations
 {
     [DbContext(typeof(VendasMVCWebContext))]
-    [Migration("20200423193348_DepartamentoForeignKey")]
-    partial class DepartamentoForeignKey
+    [Migration("20200425165029_Inicial")]
+    partial class Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
