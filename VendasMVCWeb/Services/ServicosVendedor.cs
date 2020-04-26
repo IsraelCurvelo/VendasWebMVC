@@ -23,8 +23,20 @@ namespace VendasMVCWeb.Services
 
         public void Inserir(Vendedor vendedor)
         {
-            //obj.Departamento = _context.Departamento.First();
+           
             _context.Add(vendedor);
+            _context.SaveChanges();
+        }
+
+        public Vendedor AcharPorId(int id)
+        {
+            return _context.Vendedor.FirstOrDefault(vendedor => vendedor.Id == id);
+        }
+
+        public void Remover(int id)
+        {
+            var obj = _context.Vendedor.Find(id);
+            _context.Vendedor.Remove(obj);
             _context.SaveChanges();
         }
     }
