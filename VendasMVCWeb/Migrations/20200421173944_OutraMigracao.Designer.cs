@@ -4,13 +4,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using VendasMVCWeb.Data;
+using VendasMVCWeb.Models;
 
 namespace VendasMVCWeb.Migrations
 {
     [DbContext(typeof(VendasMVCWebContext))]
-    [Migration("20200425165029_Inicial")]
-    partial class Inicial
+    [Migration("20200421173944_OutraMigracao")]
+    partial class OutraMigracao
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -58,7 +58,7 @@ namespace VendasMVCWeb.Migrations
 
                     b.Property<DateTime>("DataNascimento");
 
-                    b.Property<int>("DepartamentoId");
+                    b.Property<int?>("DepartamentoId");
 
                     b.Property<string>("Email");
 
@@ -84,8 +84,7 @@ namespace VendasMVCWeb.Migrations
                 {
                     b.HasOne("VendasMVCWeb.Models.Departamento", "Departamento")
                         .WithMany("Vendedores")
-                        .HasForeignKey("DepartamentoId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("DepartamentoId");
                 });
 #pragma warning restore 612, 618
         }

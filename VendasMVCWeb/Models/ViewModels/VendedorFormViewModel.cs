@@ -5,10 +5,11 @@ using System.Threading.Tasks;
 
 namespace VendasMVCWeb.Models.ViewModels
 {
-    public class VendedoresViewModels
+    public class VendedorFormViewModel
     {
         public Vendedor Vendedor { get; set; }
         public ICollection<Departamento> Departamentos { get; set; }
+
 
     }
 }

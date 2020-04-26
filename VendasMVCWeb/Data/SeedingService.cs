@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using VendasMVCWeb.Models;
 using VendasMVCWeb.Models.Enums;
 
-namespace VendasMVCWeb.Data
+namespace VendasMVCWeb.Models
 {
     public class Seedingservice
     {

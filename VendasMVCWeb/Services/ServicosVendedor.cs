@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using VendasMVCWeb.Data;
 using VendasMVCWeb.Models;
+
 
 namespace VendasMVCWeb.Services
 {
@@ -21,12 +21,11 @@ namespace VendasMVCWeb.Services
             return _context.Vendedor.ToList();
         }
 
-        public void Inserir(Vendedor obj)
+        public void Inserir(Vendedor vendedor)
         {
-            obj.Departamento = _context.Departamento.First();
-            _context.Add(obj);
+            //obj.Departamento = _context.Departamento.First();
+            _context.Add(vendedor);
             _context.SaveChanges();
-           
         }
     }
 }

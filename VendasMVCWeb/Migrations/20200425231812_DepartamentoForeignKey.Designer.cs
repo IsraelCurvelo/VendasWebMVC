@@ -4,12 +4,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using VendasMVCWeb.Data;
+using VendasMVCWeb.Models;
 
 namespace VendasMVCWeb.Migrations
 {
     [DbContext(typeof(VendasMVCWebContext))]
-    [Migration("20200425165540_DepartamentoForeignKey")]
+    [Migration("20200425231812_DepartamentoForeignKey")]
     partial class DepartamentoForeignKey
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

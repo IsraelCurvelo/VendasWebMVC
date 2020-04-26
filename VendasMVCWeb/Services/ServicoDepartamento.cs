@@ -2,16 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using VendasMVCWeb.Data;
 using VendasMVCWeb.Models;
 
 namespace VendasMVCWeb.Services
 {
-    public class ServicosDepartamento
+    public class ServicoDepartamento
     {
         private readonly VendasMVCWebContext _context;
 
-        public ServicosDepartamento(VendasMVCWebContext context)
+        public ServicoDepartamento(VendasMVCWebContext context)
         {
             _context = context;
         }

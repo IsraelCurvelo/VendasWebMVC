@@ -12,13 +12,12 @@ namespace VendasMVCWeb.Controllers
     public class VendedoresController : Controller
     {
         private readonly ServicosVendedor _servicosVendedor;
-        private readonly ServicosDepartamento _servicosDepartamento;
+        private readonly ServicoDepartamento _servicoDepartamento;
 
-        public VendedoresController (ServicosVendedor servicosVendedor,ServicosDepartamento servicosDepartamento)
+        public VendedoresController (ServicosVendedor servicosVendedor, ServicoDepartamento servicoDepartamento)
         {
             _servicosVendedor = servicosVendedor;
-            _servicosDepartamento = servicosDepartamento;
-
+            _servicoDepartamento = servicoDepartamento;
         }
 
 
@@ -30,16 +29,16 @@ namespace VendasMVCWeb.Controllers
 
         public IActionResult Create()
         {
-            var departamentos = _servicosDepartamento.AcharTodos();
-            var viewModel = new VendedoresViewModels { Departamentos = departamentos};
+            var departamentos = _servicoDepartamento.AcharTodos();
+            var viewModel = new VendedorFormViewModel { Departamentos = departamentos };
             return View(viewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Vendedor obj)
+        public IActionResult Create(Vendedor vendedor)
         {
-            _servicosVendedor.Inserir(obj);
+            _servicosVendedor.Inserir(vendedor);
             return RedirectToAction(nameof (Index));
         }
 
