@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using VendasMVCWeb.Models;
 using Microsoft.EntityFrameworkCore;
-
+using VendasMVCWeb.Services.Exceptions;
 
 namespace VendasMVCWeb.Services
 {
@@ -24,7 +24,7 @@ namespace VendasMVCWeb.Services
 
         public void Inserir(Vendedor vendedor)
         {
-           
+
             _context.Add(vendedor);
             _context.SaveChanges();
         }
@@ -39,6 +39,23 @@ namespace VendasMVCWeb.Services
             var obj = _context.Vendedor.Find(id);
             _context.Vendedor.Remove(obj);
             _context.SaveChanges();
+        }
+
+        public void Atualizar(Vendedor vendedor)
+        {
+            if (!_context.Vendedor.Any(x => x.Id == vendedor.Id))
+            {
+                throw new NotFoundException("Id não encontrado");
+            }
+            try
+            {
+                _context.Update(vendedor);
+                _context.SaveChanges();
+            }
+            catch(DbUpdateConcurrencyException e)
+            {
+                throw new DbConcurrencyException(e.Message);
+            }
         }
     }
 }
