@@ -71,8 +71,15 @@ namespace VendasMVCWeb.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id)
         {
-            await _servicosVendedor.RemoverAsync(id);
-            return RedirectToAction(nameof(Index));
+            try
+            {
+                await _servicosVendedor.RemoverAsync(id);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (IntegrityException e)
+            {
+                return RedirectToAction(nameof(Error), new { message ="Não é possivel deletar o vendedor, pois o mesmo possui vendas"});
+            }
         }
 
         public async Task<IActionResult> Details(int? id)
