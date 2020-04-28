@@ -17,40 +17,41 @@ namespace VendasMVCWeb.Services
             _context = context;
         }
 
-        public List<Vendedor> AcharTodos()
+        public async Task<List<Vendedor>> AcharTodosAsync()
         {
-            return _context.Vendedor.ToList();
+            return await _context.Vendedor.ToListAsync();
         }
 
-        public void Inserir(Vendedor vendedor)
+        public async Task InserirAsync(Vendedor vendedor)
         {
 
             _context.Add(vendedor);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public Vendedor AcharPorId(int id)
+        public async Task<Vendedor> AcharPorIdAsync(int id)
         {
-            return _context.Vendedor.Include(obj => obj.Departamento).FirstOrDefault(vendedor => vendedor.Id == id);
+            return await  _context.Vendedor.Include(obj => obj.Departamento).FirstOrDefaultAsync(vendedor => vendedor.Id == id);
         }
 
-        public void Remover(int id)
+        public async Task RemoverAsync(int id)
         {
-            var obj = _context.Vendedor.Find(id);
+            var obj =await _context.Vendedor.FindAsync(id);
             _context.Vendedor.Remove(obj);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public void Atualizar(Vendedor vendedor)
+        public async Task AtualizarAsync(Vendedor vendedor)
         {
-            if (!_context.Vendedor.Any(x => x.Id == vendedor.Id))
+            bool temUm = await _context.Vendedor.AnyAsync(x => x.Id == vendedor.Id);
+            if (!temUm)
             {
                 throw new NotFoundException("Id não encontrado");
             }
             try
             {
                 _context.Update(vendedor);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
             }
             catch(DbUpdateConcurrencyException e)
             {

@@ -23,34 +23,42 @@ namespace VendasMVCWeb.Controllers
         }
 
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var lista = _servicosVendedor.AcharTodos();
+            var lista = await _servicosVendedor.AcharTodosAsync();
             return View(lista);
         }
 
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            var departamentos = _servicoDepartamento.AcharTodos();
+            var departamentos = await _servicoDepartamento.AcharTodosAsync();
             var viewModel = new VendedorFormViewModel { Departamentos = departamentos };
             return View(viewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Vendedor vendedor)
+        public async Task<IActionResult> Create(Vendedor vendedor)
         {
-            _servicosVendedor.Inserir(vendedor);
+            if (!ModelState.IsValid)
+            {
+                var departmentos = await _servicoDepartamento.AcharTodosAsync();
+                var viewModel = new VendedorFormViewModel { Vendedor = vendedor, Departamentos = departmentos };
+                return View(viewModel);
+
+            }
+
+            await _servicosVendedor.InserirAsync(vendedor);
             return RedirectToAction(nameof (Index));
         }
 
-        public IActionResult Delete(int? id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id não fornecido" });
             }
-            var obj = _servicosVendedor.AcharPorId(id.Value);
+            var obj =await _servicosVendedor.AcharPorIdAsync(id.Value);
             if (obj == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id não encontrado" });
@@ -61,19 +69,19 @@ namespace VendasMVCWeb.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            _servicosVendedor.Remover(id);
+            await _servicosVendedor.RemoverAsync(id);
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult Details(int? id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id não fornecido" });
             }
-            var obj = _servicosVendedor.AcharPorId(id.Value);
+            var obj = await _servicosVendedor.AcharPorIdAsync(id.Value);
             if (obj == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id não encontrado" });
@@ -82,36 +90,44 @@ namespace VendasMVCWeb.Controllers
             return View(obj);
         }
 
-        public IActionResult Edit(int? id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id não fornecido" });
             }
 
-            var obj = _servicosVendedor.AcharPorId(id.Value);
+            var obj = await _servicosVendedor.AcharPorIdAsync(id.Value);
             if(id == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id não encontrado" });
             }
 
-            List<Departamento> departamentos = _servicoDepartamento.AcharTodos();
+            List<Departamento> departamentos =await _servicoDepartamento.AcharTodosAsync();
             VendedorFormViewModel viewModel = new VendedorFormViewModel { Vendedor = obj, Departamentos = departamentos };
             return View(viewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id,Vendedor vendedor)
+        public async Task<IActionResult> Edit(int id,Vendedor vendedor)
         {
-            if(id != vendedor.Id)
+            if (!ModelState.IsValid)
+            {
+                var departmentos = await _servicoDepartamento.AcharTodosAsync();
+                var viewModel = new VendedorFormViewModel { Vendedor = vendedor, Departamentos = departmentos };
+                return View(viewModel);
+
+            }
+
+            if (id != vendedor.Id)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id não corresponde" });
             }
 
             try
             {
-                _servicosVendedor.Atualizar(vendedor);
+                await _servicosVendedor.AtualizarAsync(vendedor);
                 return RedirectToAction(nameof(Index));
 
             }
