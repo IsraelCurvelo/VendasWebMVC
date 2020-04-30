@@ -35,7 +35,7 @@ namespace VendasMVCWeb.Models
         [Display(Name="Departamento")]
         public int DepartamentoId { get; set; }
         public Departamento Departamento { get; set; }
-        public ICollection<RegistroDeVenda> Vendas { get; set; } = new List<RegistroDeVenda>();
+        public ICollection<RegistroDeVendas> Vendas { get; set; } = new List<RegistroDeVendas>();
 
         public Vendedor()
         {
@@ -51,12 +51,12 @@ namespace VendasMVCWeb.Models
             Departamento = departamento;
         }
 
-        public void AdicionarVenda(RegistroDeVenda venda)
+        public void AdicionarVenda(RegistroDeVendas venda)
         {
             Vendas.Add(venda);
         }
 
-        public void RemoverVenda(RegistroDeVenda venda)
+        public void RemoverVenda(RegistroDeVendas venda)
         {
             Vendas.Remove(venda);
         }
@@ -64,6 +64,8 @@ namespace VendasMVCWeb.Models
         public double TotalDeVendas(DateTime inicial,DateTime final)
         {
             return Vendas.Where(vendas => vendas.Data >= inicial && vendas.Data <= final).Sum(vendas => vendas.ValorTotal);
-                }
+        }
+
+      
     }
 }

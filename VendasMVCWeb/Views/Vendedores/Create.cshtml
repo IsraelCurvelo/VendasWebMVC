@@ -1,6 +1,6 @@
 ﻿@model VendasMVCWeb.Models.ViewModels.VendedorFormViewModel
 @{
-    ViewData["Title"] = "Cadastrar Novo";
+    ViewData["Title"] = "Cadastrar ";
 }
 
 <h2>@ViewData["Title"]</h2>
@@ -19,7 +19,7 @@
 
             <div class=" form-group">
                 <label asp-for="Vendedor.Email" class="control-label"></label>
-                <input asp-for="Vendedor.Email" class="form-control" />
+                <input asp-for="Vendedor.Email" class="form-control " />
                 <span asp-validation-for="Vendedor.Email" class="text-danger"></span>
             </div>
 

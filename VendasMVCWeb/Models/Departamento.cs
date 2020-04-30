@@ -29,5 +29,7 @@ namespace VendasMVCWeb.Models
         {
             return Vendedores.Sum(vendedores => vendedores.TotalDeVendas(inicial, final));
         }
+
+       
     }
 }
