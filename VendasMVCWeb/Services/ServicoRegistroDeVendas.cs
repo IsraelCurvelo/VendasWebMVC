@@ -36,5 +36,25 @@ namespace VendasMVCWeb.Services
                 .ToListAsync();
         }
 
+        public async Task<List<IGrouping<Departamento,RegistroDeVendas>>> AcharGrupoPorDataAsync(DateTime? inicio, DateTime? final)
+        {
+            var resultado = from obj in _context.RegistroDeVendas select obj;
+            if (inicio.HasValue)
+            {
+                resultado = resultado.Where(x => x.Data >= inicio.Value);
+            }
+            if (final.HasValue)
+            {
+                resultado = resultado.Where(x => x.Data <= final.Value);
+
+            }
+            return await resultado
+                .Include(x => x.Vendedor)
+                .Include(x => x.Vendedor.Departamento)
+                .OrderByDescending(x => x.Data)
+                .GroupBy(x => x.Vendedor.Departamento)
+                .ToListAsync();
+        }
+
     }
 }
